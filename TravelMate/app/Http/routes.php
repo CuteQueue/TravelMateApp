@@ -39,11 +39,15 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('user', 'UserController@show');
 
-	Route::get('newProfil/{id}', 'UserController@getNewProfil');
-	
+	Route::get('profil/edit/{id}', 'ProfilController@edit');
+
+	Route::get('profil/create/{id}', 'ProfilController@create');
+
+	Route::post('profil/edit/{id}', 'ProfilController@update');
+
+	Route::post('profil/create/{id}', 'ProfilController@store');
+
 	Route::get('profil/{id}', 'ProfilController@show');
 
-	Route::get('editProfil/{id}', 'ProfilController@editProfil');
 
-	
 });

@@ -22,7 +22,7 @@ class UserController extends Controller
 	}
 	
 
-	 public function getNewProfil($id){
+	/* public function getNewProfil($id){
       	
       	//---Neues Profil erstellen---
 	 	$user = User::find($id);
@@ -39,5 +39,5 @@ class UserController extends Controller
 		$data = array('profil' => $profil);
 		return view('profilview', $data);
 
-    }
+    }*/
 }
