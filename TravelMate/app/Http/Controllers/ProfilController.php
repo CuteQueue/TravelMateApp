@@ -81,6 +81,14 @@ class ProfilController extends Controller
 		return redirect('profil/'.$profil->id)->with('message', 'success|Profil erfolgreich aktualisiert!');
 	}
 
+	//-----Profil loeschen-----
+
+	public function delete($id){
+		$profil = Profil::find($id);
+		$profil->delete();
+
+		return redirect('home')->with('message', 'success|Profil deleted!');
+	}
 	
 	
 }

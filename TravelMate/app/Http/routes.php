@@ -47,6 +47,8 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::post('profil/create/{id}', 'ProfilController@store');
 
+	Route::get('profil/delete/{id}', 'ProfilController@delete');
+
 	Route::get('profil/{id}', 'ProfilController@show');
 
 

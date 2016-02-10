@@ -12,6 +12,8 @@
                     <p>Age: {{$profil->age}} </p>  
                     <p>Hobbies: {{$profil->hobbies}}</p>
                     <p>About Me: {{$profil->about}}</p>
+
+                    <a href="{{ URL::to('profil/delete/' . Auth::user()->id) }}" class="btn btn-default btn-sm glyphicon glyphicon-trash"></a>
                 </div>
             </div>
         </div>
