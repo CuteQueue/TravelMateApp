@@ -13,16 +13,56 @@ use DB;
 
 class UserController extends Controller
 {	
-	
 
-    public function show(){
+
+	public function index(){
 		$users = User::all();
-		$data = array('users' => $users);
-		return view('userview', $data);
+		return response()->json([
+			'data' => $this->transformCollection($users)
+		], 200);
+	}
+
+	public function show($id){
+		$user = User::find($id);
+		
+		if(!$user){
+			return response()->json([
+				'error' =>[
+					'message' => 'User does not exist!'
+				]
+			], 404);
+		}
+
+		//get previous User id
+		$previous = User::where('id', '<', $user->id)->max('id');
+
+		//get next User id
+		$next = User::where('id', '>', $user->id)->min('id');
+
+		return response()->json([
+			'previous_user_id' => $previous,
+			'next_user_id' => $next,
+			'data' => $this->transform($user)
+			], 200);
+	}
+
+
+
+	private function transformCollection($users){
+		return array_map([$this, 'transform'], $users->toArray());
+	}
+
+	private function transform($user){
+		return[
+			'user_id' => $user['id'],
+			'user_name' => $user['name'],
+			'user_mail' => $user['email'],
+			//'profile_age' => $user->profil['age']
+		];
 	}
 	
 
-	/* public function getNewProfil($id){
+	 public function getNewProfil($id){
       	
       	//---Neues Profil erstellen---
 	 	$user = User::find($id);
@@ -39,5 +79,7 @@ class UserController extends Controller
 		$data = array('profil' => $profil);
 		return view('profilview', $data);
 
-    }*/
+    }
+
+    
 }
