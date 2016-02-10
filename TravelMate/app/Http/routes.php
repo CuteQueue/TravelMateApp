@@ -28,6 +28,11 @@
 });*/
 use App\Profil as Profil;
 
+Route::group(['prefix' => 'api/v1'], function(){
+	Route::resource('users','UserController');
+});
+
+
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
@@ -44,6 +49,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('profil/{id}', 'ProfilController@show');
 
 	Route::get('editProfil/{id}', 'ProfilController@editProfil');
+
+	Route::get('createUser', 'UserController@create');
 
 	
 });
