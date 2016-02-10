@@ -29,15 +29,6 @@ class ProfilController extends Controller
 		$data = array('user' => $user);
 		return view('profil.create', $data);
 
-		/*Alter Variante:
-
-		$user = User::find($id);
-	 	$user_id = $user->id;
-	
-	 	$profil = array(['id' => $user_id, 'user_id' => $user_id, 'location' => 'Salzbergen']);
-		DB::table('profils')->insert($profil);
- 
-		return redirect('profil/'.$user->id)->with('message', 'success|Profil erfolgreich angelegt!');*/
 	}
 
 	//----Neues Profil in DB speichern----
@@ -89,7 +80,6 @@ class ProfilController extends Controller
 
 		return redirect('home')->with('message', 'success|Profil deleted!');
 	}
-	
 	
 }
 
