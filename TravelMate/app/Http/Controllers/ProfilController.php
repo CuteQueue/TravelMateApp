@@ -80,7 +80,12 @@ class ProfilController extends Controller
 
 		$profil->update($input);
 
-		return redirect('profil')->with('message', 'success|Profil erfolgreich aktualisiert!');
+		//--ALT:  return redirect('profil')->with('message', 'success|Profil erfolgreich aktualisiert!');
+		//NEU
+		 return response()->json([
+                'message' => 'Profil Updated Succesfully',
+                'data' => $this->transform($profil)
+        ],200);
 
 	}
 

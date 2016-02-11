@@ -42,17 +42,17 @@ Route::group(['middleware' => 'web'], function () {
 		return view('welcome');
 	});
 
-	Route::post('user', 'UserController@store');
+	//Route::post('user', 'UserController@store');
 
-	Route::put('user', 'UserController@update');
+	//Route::put('user', 'UserController@update');
 
 	Route::delete('user', 'UserController@destroy');
 
-	//Route::get('user/create', 'UserController@create');
+	Route::get('user/create', 'UserController@create');
 
-	//Route::get('user/login', 'UserController@update');
+	Route::get('user/login', 'UserController@show');
 
-	Route::get('user', 'UserController@show');
+	//Route::get('user', 'UserController@show2');
 
 	Route::get('profil/edit', 'ProfilController@edit');
 

@@ -22,13 +22,13 @@ class UserController extends Controller
 		], 200);
 	}
 
-	public function show($id){
+	/*public function show2($id){		
 		$user = User::find($id);
 		
 		if(!$user){
 			return response()->json([
 				'error' =>[
-					'message' => 'User does not exist!'
+					'message' => 'User TEST does not exist!'
 				]
 			], 404);
 		}
@@ -44,7 +44,7 @@ class UserController extends Controller
 			'next_user_id' => $next,
 			'data' => $this->transform($user)
 			], 200);
-	}
+	}*/
 
 
 
@@ -61,25 +61,24 @@ class UserController extends Controller
 		];
 	}
 
-	/*public function create(){
+	public function create(){
 
 		return redirect('/register');
 	}
 	
-	public function update(){
-
+	public function show(){
 		return redirect('/login');
-	}*/
+	}
 
 
 //STORE USER
-	public function store(Request $request)
+	/*public function store(Request $request)
     {
  
-        if(! $request->email or ! $request->password){
+        if(! $request->name or ! $request->email or ! $request->password){
             return response()->json([
                 'error' => [
-                    'message' => 'Please Provide Both email and password!'
+                    'message' => 'Please Provide name, email and password!'
                 ]
             ], 422);
         }
@@ -98,7 +97,7 @@ class UserController extends Controller
         if(! $request->email or ! $request->password){
             return response()->json([
                 'error' => [
-                    'message' => 'Please Provide Both email and password'
+                    'message' => 'Please Provide email and password'
                 ]
             ], 422);
         }
@@ -111,7 +110,7 @@ class UserController extends Controller
         return response()->json([
                 'message' => 'User Updated Succesfully'
         ]);
-    }
+    }*/
 
 //DESTROY USER
       public function destroy($id)
