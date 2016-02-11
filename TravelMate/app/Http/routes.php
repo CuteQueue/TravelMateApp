@@ -42,9 +42,15 @@ Route::group(['middleware' => 'web'], function () {
 		return view('welcome');
 	});
 
-	Route::get('user/create', 'UserController@create');
+	Route::post('user', 'UserController@store');
 
-	Route::get('user/login', 'UserController@update');
+	Route::put('user', 'UserController@update');
+
+	Route::delete('user', 'UserController@destroy');
+
+	//Route::get('user/create', 'UserController@create');
+
+	//Route::get('user/login', 'UserController@update');
 
 	Route::get('user', 'UserController@show');
 

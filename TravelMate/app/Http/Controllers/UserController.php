@@ -61,7 +61,7 @@ class UserController extends Controller
 		];
 	}
 
-	public function create(){
+	/*public function create(){
 
 		return redirect('/register');
 	}
@@ -69,8 +69,54 @@ class UserController extends Controller
 	public function update(){
 
 		return redirect('/login');
-	}
+	}*/
 
 
+//STORE USER
+	public function store(Request $request)
+    {
+ 
+        if(! $request->email or ! $request->password){
+            return response()->json([
+                'error' => [
+                    'message' => 'Please Provide Both email and password!'
+                ]
+            ], 422);
+        }
+        $user = User::create($request->all());
+ 
+        return response()->json([
+                'message' => 'User Created Succesfully',
+                'data' => $this->transform($user)
+        ]);
+    }
+
+
+//UPDATE USER
+    public function update(Request $request, $id)
+    {    
+        if(! $request->email or ! $request->password){
+            return response()->json([
+                'error' => [
+                    'message' => 'Please Provide Both email and password'
+                ]
+            ], 422);
+        }
+        
+        $user = User::find($id);
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save(); 
+ 
+        return response()->json([
+                'message' => 'User Updated Succesfully'
+        ]);
+    }
+
+//DESTROY USER
+      public function destroy($id)
+    {
+        User::destroy($id);
+    }
     
 }
