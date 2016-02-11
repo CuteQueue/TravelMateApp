@@ -60,26 +60,17 @@ class UserController extends Controller
 			//'profile_age' => $user->profil['age']
 		];
 	}
+
+	public function create(){
+
+		return redirect('/register');
+	}
 	
+	public function update(){
 
-	 public function getNewProfil($id){
-      	
-      	//---Neues Profil erstellen---
-	 	$user = User::find($id);
-		$data = array('user' => $user);
-	 	$user_id = $user->id;
-	
-	 	$profil = array(['id' => $user_id, 'user_id' => $user_id, 'location' => 'Salzbergen']);
-	 	 //Id von Profil = User_id notwenig? bzw. sinnvoll?
+		return redirect('/login');
+	}
 
-		DB::table('profils')->insert($profil);
- 
- 		//---Weiterleiten auf die Profilseite---
-		$profil = Profil::find($id);
-		$data = array('profil' => $profil);
-		return view('profilview', $data);
-
-    }
 
     
 }

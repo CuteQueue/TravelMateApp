@@ -4,7 +4,7 @@
 <div class="container">
         <div class="col-md-10 col-md-offset-1">
 
-            {!! Form::open(['url' => 'profil/create/'. Auth::user()->id]) !!}
+            {!! Form::open(['url' => 'profil/create']) !!}
 
             <h2 class="form-signup-heading">Create Profil</h2>
 

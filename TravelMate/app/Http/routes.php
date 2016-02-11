@@ -28,6 +28,11 @@
 });*/
 use App\Profil as Profil;
 
+Route::group(['prefix' => 'api/v1'], function(){
+	Route::resource('user', 'UserController');
+	Route::resource('profil', 'ProfilController');
+});
+
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
@@ -37,19 +42,23 @@ Route::group(['middleware' => 'web'], function () {
 		return view('welcome');
 	});
 
+	Route::get('user/create', 'UserController@create');
+
+	Route::get('user/login', 'UserController@update');
+
 	Route::get('user', 'UserController@show');
 
-	Route::get('profil/edit/{id}', 'ProfilController@edit');
+	Route::get('profil/edit', 'ProfilController@edit');
 
-	Route::get('profil/create/{id}', 'ProfilController@create');
+	Route::post('profil/edit', 'ProfilController@update');
 
-	Route::post('profil/edit/{id}', 'ProfilController@update');
+	Route::get('profil/create', 'ProfilController@create');
 
-	Route::post('profil/create/{id}', 'ProfilController@store');
+	Route::post('profil/create', 'ProfilController@store');
 
-	Route::get('profil/delete/{id}', 'ProfilController@delete');
+	Route::get('profil/delete', 'ProfilController@delete');
 
-	Route::get('profil/{id}', 'ProfilController@show');
+	Route::get('profil', 'ProfilController@show');
 
 
 });

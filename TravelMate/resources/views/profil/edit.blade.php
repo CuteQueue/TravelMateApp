@@ -4,7 +4,16 @@
 <div class="container">
         <div class="col-md-10 col-md-offset-1">
 
-            {!! Form::open(['url' => 'profil/edit/'. Auth::user()->id]) !!}
+            @if ($errors->any())
+                <ul class = "alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <li> {{ $error }} </li>
+                    @endforeach
+                </ul>
+            @endif
+
+           <!-- {!! Form::open(['url' => 'profil/edit/'. Auth::user()->id]) !!} -->
+           {!! Form::model($profil, array('url' => array('profil/edit'))) !!}
 
             <h2 class="form-signup-heading">Edit Profil</h2>
 
@@ -35,6 +44,8 @@
                     {!! Form::submit('Save', ['class'=>'btn btn-primary form-control'])!!}
                 </div>
             {!! Form::close() !!}
+
+            
     </div>
 </div>
 @endsection

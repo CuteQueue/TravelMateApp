@@ -5,42 +5,52 @@ namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request; //mit dem oberen hat Request::all() nicht funktioniert
 //use App\Models\User;
-
+use App\Http\Requests\EditProfilRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth; //um auf  Auth::user()->id zugreifen zu könnnen
 use App\Profil as Profil;
 use App\User as User;
 use DB;
 
 class ProfilController extends Controller
 {	
-	
+	public function index(){
+	//$user = Auth::user();
+	//echo $user->name;
+	//echo $user->name;
+	//$profil = $user->profil;
+		$profil = Profil::all();
+		return response()->json([
+			'data' => $this->transform($profil)
+		], 200);
+	}
 
-	//----Profil anzeigen-----
-	public function show($id){
-		$profil = Profil::find($id);
+	//----Profil anzeigen----
+	public function show(){
+		$user = Auth::user();
+		$profil = $user->profil;
+
 		$data = array('profil' => $profil);
 		return view('profil.show', $data);
 	}
 
+
 	//----Neues Profil anlegen----
-	public function create($id){
-		$user = User::find($id);
+	public function create(){
+		$user = Auth::user();
 		$data = array('user' => $user);
 		return view('profil.create', $data);
 
 	}
 
 	//----Neues Profil in DB speichern----
-	public function store($id){
+	public function store(){
 		$input = Request::all();
-
 		$profil = new Profil();
 		//$profil->create($input);
+		$user = Auth::user();
 
-		$user = User::find($id);
-		echo $user->id;
-		$profil->id = $user->id;
 	 	$profil->location = $input['location'];
 	 	$profil->age = $input['age'];
 	 	$profil->hobbies = $input['hobbies'];
@@ -48,38 +58,57 @@ class ProfilController extends Controller
 		$profil->user_id = $user->id;
 		$profil->save();
 		
-		return redirect('profil/'.$profil->id)->with('message', 'success|Profil created!');
+		return redirect('profil')->with('message', 'success|Profil created!');
 	}
 
 
 	//----Profil bearbeiten----
-	public function edit($id){
-		$profil = Profil::find($id);
-		//echo $profil->user->name;
+	public function edit(){
+		$user = Auth::user();
+		$profil = $user->profil;
+		
 		$data = array('profil' => $profil);
 		return view('profil.edit', $data);
 	}
 
-	//----Profilupdate in DB schreiben----
-	public function update($id){
+	//----Profilupdate in DB schreiben
+	public function update(EditProfilRequest $request){
 
-		$input = Request::all();
-		$profil = Profil::find($id);
-		
+		$input = $request->all();
+		$user = Auth::user();
+		$profil = $user->profil;
+
 		$profil->update($input);
-		echo $profil->id;
 
-		return redirect('profil/'.$profil->id)->with('message', 'success|Profil erfolgreich aktualisiert!');
+		return redirect('profil')->with('message', 'success|Profil erfolgreich aktualisiert!');
+
 	}
 
-	//-----Profil loeschen-----
-
-	public function delete($id){
-		$profil = Profil::find($id);
+	//----Profil loeschen----
+	public function delete(){
+		$user = Auth::user();
+		$profil = $user->profil;
 		$profil->delete();
 
 		return redirect('home')->with('message', 'success|Profil deleted!');
 	}
+
+
+	private function transformCollection($profil){
+		return array_map([$this, 'transform'], $profil->toArray());
+	}
+
+	private function transform($profil){
+		return[
+			'profil_id' => $profil['id'],
+			'user_id' => $profil['user_id'],
+			'profil_location' => $profil['location'],
+			'profil_age' => $profil['age'],
+			'profil_hobbies' => $profil['hobbies'],
+			'profil_about' => $profil['about'],
+		];
+	}
+
 	
 }
 
