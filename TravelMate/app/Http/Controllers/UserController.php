@@ -13,7 +13,10 @@ use DB;
 
 class UserController extends Controller
 {	
-
+	public function __construct(){
+        //$this->middleware('auth.basic');
+        $this->middleware('jwt.auth');
+    }
 
 	public function index(){
 		$users = User::all();
@@ -22,7 +25,8 @@ class UserController extends Controller
 		], 200);
 	}
 
-	/*public function show2($id){		
+
+	/*public function show($id){		
 		$user = User::find($id);
 		
 		if(!$user){
@@ -67,7 +71,8 @@ class UserController extends Controller
 	}
 	
 	public function show(){
-		return redirect('/login');
+		//return redirect('/login');
+		 return View::make('/login');
 	}
 
 

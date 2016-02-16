@@ -28,10 +28,18 @@
 });*/
 use App\Profil as Profil;
 
-Route::group(['prefix' => 'api/v1'], function(){
+Route::group(['middleware' => 'cors', 'prefix' => 'api/v1'], function()
+{
+    Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+    Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
+});
+
+Route::group(['middleware' => 'cors','prefix' => 'api/v1'], function(){
 	Route::resource('user', 'UserController');
 	Route::resource('profil', 'ProfilController');
 });
+
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
@@ -52,7 +60,7 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('user/login', 'UserController@show');
 
-	//Route::get('user', 'UserController@show2');
+	Route::get('user', 'UserController@show');
 
 	Route::get('profil/edit', 'ProfilController@edit');
 
