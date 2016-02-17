@@ -26,7 +26,7 @@ class UserController extends Controller
 	}
 
 
-	/*public function show($id){		
+	public function show($id){		
 		$user = User::find($id);
 		
 		if(!$user){
@@ -48,7 +48,7 @@ class UserController extends Controller
 			'next_user_id' => $next,
 			'data' => $this->transform($user)
 			], 200);
-	}*/
+	}
 
 
 
@@ -70,14 +70,14 @@ class UserController extends Controller
 		return redirect('/register');
 	}
 	
-	public function show(){
+	/*public function show(){
 		//return redirect('/login');
 		 return View::make('/login');
-	}
+	}*/
 
 
 //STORE USER
-	/*public function store(Request $request)
+	public function store(Request $request)
     {
  
         if(! $request->name or ! $request->email or ! $request->password){
@@ -97,7 +97,7 @@ class UserController extends Controller
 
 
 //UPDATE USER
-    public function update(Request $request, $id)
+    /*public function update(Request $request, $id)
     {    
         if(! $request->email or ! $request->password){
             return response()->json([
