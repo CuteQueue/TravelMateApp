@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 use App\User as User;
 use App\Profil as Profil;
 use DB;
-
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 
 
@@ -18,7 +19,7 @@ class UserController extends Controller
 	public function __construct(){
         //$this->middleware('auth.basic');
         //$this->middleware('jwt.auth');
-        $this->middleware('auth', ['only' => 'store', 'transform']);
+        //$this->middleware('auth', ['only' => 'store', 'transform']);
     }
 
 	public function index(){

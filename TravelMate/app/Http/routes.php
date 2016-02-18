@@ -34,6 +34,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'api/v1'], function()
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
     Route::post('user', 'UserController@store');
+    Route::get('allUser', 'UserController@index');
 });
 
 Route::group(['middleware' => 'cors','prefix' => 'api/v1'], function(){
@@ -43,15 +44,15 @@ Route::group(['middleware' => 'cors','prefix' => 'api/v1'], function(){
 
 
 Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+   // Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+    //oute::get('/home', 'HomeController@index');
 	
 	Route::get('/', function () {
-		return view('welcome');
+		return ('Hello World');
 	});
 
-	Route::post('user', 'UserController@store');
+	//Route::post('user', 'UserController@store');
 
 	Route::put('user', 'UserController@user');
 
