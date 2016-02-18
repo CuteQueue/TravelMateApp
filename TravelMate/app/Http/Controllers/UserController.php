@@ -65,6 +65,7 @@ class UserController extends Controller
 			'user_id' => $user['id'],
 			'user_name' => $user['name'],
 			'user_mail' => $user['email'],
+			'user_last_name' => $user['last_name'],
 			//'profile_age' => $user->profil['age']
 		];
 	}
@@ -84,10 +85,10 @@ class UserController extends Controller
 	public function store(Request $request)
     {
  
-        if(! $request->name or ! $request->email or ! $request->password){
+        if(! $request->name or ! $request->last_name or ! $request->email or ! $request->password){
             return response()->json([
                 'error' => [
-                    'message' => 'Please Provide name, email and password!'
+                    'message' => 'Please Provide name, last name, email and password!'
                 ]
             ], 422);
         }
