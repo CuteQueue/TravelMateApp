@@ -51,7 +51,9 @@ Route::group(['middleware' => 'web'], function () {
 		return view('welcome');
 	});
 
-	//Route::post('user', 'UserController@store');
+	Route::post('user', 'UserController@store');
+
+	Route::put('user', 'UserController@user');
 
 	//Route::put('user', 'UserController@update');
 
