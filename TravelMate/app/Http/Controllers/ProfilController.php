@@ -27,12 +27,16 @@ class ProfilController extends Controller
 	}
 
 	//----Profil anzeigen----
-	public function show(){
-		$user = Auth::user();
+	public function show($id){
+		//$user = Auth::user();
+		//$profil = $user->profil;
+		$user = User::find($id);
+		console.log("TEST");
 		$profil = $user->profil;
 
-		$data = array('profil' => $profil);
-		return view('profil.show', $data);
+		return response()->json([
+			'data' => $this->transformCollection($profil)
+		], 200);
 	}
 
 
