@@ -9,11 +9,18 @@ use App\Http\Controllers\Controller;
 use App\User as User;
 use App\Profil as Profil;
 use DB;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
 
 
 class UserController extends Controller
 {	
-
+	public function __construct(){
+        //$this->middleware('auth.basic');
+        //$this->middleware('jwt.auth');
+        //$this->middleware('auth', ['only' => 'store', 'transform']);
+    }
 
 	public function index(){
 		$users = User::all();
@@ -22,13 +29,14 @@ class UserController extends Controller
 		], 200);
 	}
 
-	public function show($id){
+
+	public function show($id){		
 		$user = User::find($id);
 		
 		if(!$user){
 			return response()->json([
 				'error' =>[
-					'message' => 'User does not exist!'
+					'message' => 'User TEST does not exist!'
 				]
 			], 404);
 		}
@@ -57,29 +65,67 @@ class UserController extends Controller
 			'user_id' => $user['id'],
 			'user_name' => $user['name'],
 			'user_mail' => $user['email'],
+			'user_last_name' => $user['last_name'],
 			//'profile_age' => $user->profil['age']
 		];
 	}
-	
 
-	 public function getNewProfil($id){
-      	
-      	//---Neues Profil erstellen---
-	 	$user = User::find($id);
-		$data = array('user' => $user);
-	 	$user_id = $user->id;
-	
-	 	$profil = array(['id' => $user_id, 'user_id' => $user_id, 'location' => 'Salzbergen']);
-	 	 //Id von Profil = User_id notwenig? bzw. sinnvoll?
+	public function create(){
 
-		DB::table('profils')->insert($profil);
+		return redirect('/register');
+	}
+	
+	/*public function show(){
+		//return redirect('/login');
+		 return View::make('/login');
+	}*/
+
+
+//STORE USER
+	public function store(Request $request)
+    {
  
- 		//---Weiterleiten auf die Profilseite---
-		$profil = Profil::find($id);
-		$data = array('profil' => $profil);
-		return view('profilview', $data);
-
+        if(! $request->name or ! $request->last_name or ! $request->email or ! $request->password){
+            return response()->json([
+                'error' => [
+                    'message' => 'Please Provide name, last name, email and password!'
+                ]
+            ], 422);
+        }
+        $user = User::create($request->all());
+ 
+        return response()->json([
+                'message' => 'User Created Succesfully',
+                'data' => $this->transform($user)
+        ]);
     }
 
+
+//UPDATE USER
+    /*public function update(Request $request, $id)
+    {    
+        if(! $request->email or ! $request->password){
+            return response()->json([
+                'error' => [
+                    'message' => 'Please Provide email and password'
+                ]
+            ], 422);
+        }
+        
+        $user = User::find($id);
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save(); 
+ 
+        return response()->json([
+                'message' => 'User Updated Succesfully'
+        ]);
+    }*/
+
+//DESTROY USER
+      public function destroy($id)
+    {
+        User::destroy($id);
+    }
     
 }

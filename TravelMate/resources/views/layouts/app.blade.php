@@ -55,7 +55,7 @@
                 </ul>
                 @if (Auth::user())
                 <ul class="nav navbar-nav">
-                     <li><a href="{{ url('/profil/'. Auth::user()->id)}}">Profil</a></li> 
+                     <li><a href="{{ url('/profil')}}">Profil</a></li> 
                 </ul>
                 @endif
 

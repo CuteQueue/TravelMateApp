@@ -11,7 +11,7 @@
                     You are logged in! </br>
                     Create your Profil: </br> </br>
                  
-                    <a href="{{ URL::to('profil/create/' . Auth::user()->id) }}" class="btn btn-mini btn-primary">Start</a>
+                    <a href="{{ URL::to('profil/create') }}" class="btn btn-mini btn-primary">Start</a>
                   
                     
                 </div>

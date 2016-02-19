@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfilsTable extends Migration
+class AddAbout extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,14 @@ class CreateProfilsTable extends Migration
      */
     public function up()
     {
-        Schema::create('profils', function(Blueprint $table){
-			/*$table->increments('id');
-			$table->tinyInteger('age');
-			$table->string('location');
-			$table->string('hobbies');
-			$table->string('about');*/
-			$table->integer('user_id');
-			/*$table->timestamps();*/
-		});
+        Schema::table('profils', function(Blueprint $table)
+        {
+           
+            $table->text('about');
+            
+
+        });
+    
     }
 
     /**
