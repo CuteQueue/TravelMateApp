@@ -30,12 +30,11 @@ class ProfilController extends Controller
 	public function show($id){
 		//$user = Auth::user();
 		//$profil = $user->profil;
-		$user = User::find($id);
-		console.log("TEST");
-		$profil = $user->profil;
+		//$id = 33;
+		$profil = Profil::find($id);
 
 		return response()->json([
-			'data' => $this->transformCollection($profil)
+			'data' => $this->transform($profil)
 		], 200);
 	}
 

@@ -35,7 +35,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'api/v1'], function()
     Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
     Route::post('user', 'UserController@store');
     Route::get('allUser', 'UserController@index');
-    Route::get('profil', 'ProfilController@index');
+    //Route::get('profil', 'ProfilController@index');
+    Route::get('profil/{id}', 'ProfilController@show');
 });
 
 Route::group(['middleware' => 'cors','prefix' => 'api/v1'], function(){
