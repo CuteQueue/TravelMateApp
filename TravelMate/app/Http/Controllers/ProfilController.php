@@ -22,7 +22,7 @@ class ProfilController extends Controller
 	//$profil = $user->profil;
 		$profil = Profil::all();
 		return response()->json([
-			'data' => $this->transform($profil)
+			'data' => $this->transformCollection($profil)
 		], 200);
 	}
 
@@ -102,15 +102,15 @@ class ProfilController extends Controller
 	private function transformCollection($profil){
 		return array_map([$this, 'transform'], $profil->toArray());
 	}
-
+	
 	private function transform($profil){
 		return[
-			'profil_id' => $profil['id'],
+			'id' => $profil['id'],
 			'user_id' => $profil['user_id'],
-			'profil_location' => $profil['location'],
-			'profil_age' => $profil['age'],
-			'profil_hobbies' => $profil['hobbies'],
-			'profil_about' => $profil['about'],
+			'location' => $profil['location'],
+			'age' => $profil['age'],
+			'hobbies' => $profil['hobbies'],
+			'about' => $profil['about'],
 		];
 	}
 
