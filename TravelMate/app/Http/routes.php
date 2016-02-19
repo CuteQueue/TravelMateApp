@@ -33,10 +33,12 @@ Route::group(['middleware' => 'cors', 'prefix' => 'api/v1'], function()
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
+   // Route::get('profil/{id}', 'ProfilController@show');
+     Route::get('profil', 'ProfilController@show');
     Route::post('user', 'UserController@store');
     Route::get('allUser', 'UserController@index');
     //Route::get('profil', 'ProfilController@index');
-    Route::get('profil/{id}', 'ProfilController@show');
+    
 });
 
 Route::group(['middleware' => 'cors','prefix' => 'api/v1'], function(){
