@@ -56,6 +56,7 @@ class ProfilController extends Controller
 		//$profil->create($input);
 		$user = Auth::user();
 
+
 	 	$profil->location = $input['location'];
 	 	$profil->age = $input['age'];
 	 	$profil->hobbies = $input['hobbies'];
