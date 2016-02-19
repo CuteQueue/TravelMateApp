@@ -27,7 +27,7 @@ class ProfilController extends Controller
 	}
 
 	//----Profil anzeigen----
-	public function show(){
+	public function show($id){
 		//$user = Auth::user();
 		//$profil = $user->profil;
 		//$id = 33;
