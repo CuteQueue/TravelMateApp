@@ -91,7 +91,7 @@ class ProfilController extends Controller
         $profil->destination= $request->destination;
         $profil->interests= $request->interests;
         $profil->looking_for= $request->looking_for;
-        $profil->hobbies= $request->hobbies;
+       // $profil->hobbies= $request->hobbies;
         $profil->about= $request->about;
         $profil->save(); 
 	}
@@ -137,7 +137,7 @@ class ProfilController extends Controller
 			//'when' => $profil['when'],
 			'interests' => $profil['interests'],
 			'looking_for' => $profil['looking_for'],
-			'hobbies' => $profil['hobbies'],
+			//'hobbies' => $profil['hobbies'],
 			'about' => $profil['about']
 		];
 	}

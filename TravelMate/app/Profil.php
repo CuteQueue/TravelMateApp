@@ -20,7 +20,6 @@ class Profil extends Model
 		//'when',
 		'interests',
 		'looking_for',
-		'hobbies',
 		'about'
 
 

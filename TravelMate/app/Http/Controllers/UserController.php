@@ -41,12 +41,6 @@ class UserController extends Controller
 			], 404);
 		}
 
-		/*get previous User id
-		$previous = User::where('id', '<', $user->id)->max('id');
-
-		//get next User id
-		$next = User::where('id', '>', $user->id)->min('id');*/
-
 		return response()->json([
 			'data' => $this->transform($user)
 			], 200);
@@ -123,8 +117,7 @@ class UserController extends Controller
 			'id' => $user['id'],
 			'name' => $user['name'],
 			'mail' => $user['email'],
-			'last_name' => $user['last_name'],
-			//'profile_age' => $user->profil['age']
+			'last_name' => $user['last_name']
 		];
 	}
     
