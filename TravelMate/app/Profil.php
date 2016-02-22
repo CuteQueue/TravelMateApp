@@ -12,10 +12,17 @@ class Profil extends Model
 
 	protected $fillable = [
 
-		'location',
+		'user_id',
 		'age',
+		'sex',
+		'location',
+		'destination',
+		//'when',
+		'interests',
+		'looking_for',
 		'hobbies',
 		'about'
+
 
 	];
 }

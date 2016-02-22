@@ -36,39 +36,25 @@ class UserController extends Controller
 		if(!$user){
 			return response()->json([
 				'error' =>[
-					'message' => 'User TEST does not exist!'
+					'message' => 'User does not exist!'
 				]
 			], 404);
 		}
 
-		//get previous User id
+		/*get previous User id
 		$previous = User::where('id', '<', $user->id)->max('id');
 
 		//get next User id
-		$next = User::where('id', '>', $user->id)->min('id');
+		$next = User::where('id', '>', $user->id)->min('id');*/
 
 		return response()->json([
-			'previous_user_id' => $previous,
-			'next_user_id' => $next,
 			'data' => $this->transform($user)
 			], 200);
 	}
 
 
 
-	private function transformCollection($users){
-		return array_map([$this, 'transform'], $users->toArray());
-	}
-
-	private function transform($user){
-		return[
-			'user_id' => $user['id'],
-			'user_name' => $user['name'],
-			'user_mail' => $user['email'],
-			'user_last_name' => $user['last_name'],
-			//'profile_age' => $user->profil['age']
-		];
-	}
+	
 
 	public function create(){
 
@@ -109,7 +95,7 @@ class UserController extends Controller
                 'error' => [
                     'message' => 'Please Provide email and password'
                 ]
-            ], 422);
+            ], 422
         }
         
         $user = User::find($id);
@@ -127,5 +113,19 @@ class UserController extends Controller
     {
         User::destroy($id);
     }
+
+    private function transformCollection($users){
+		return array_map([$this, 'transform'], $users->toArray());
+	}
+
+	private function transform($user){
+		return[
+			'id' => $user['id'],
+			'name' => $user['name'],
+			'mail' => $user['email'],
+			'last_name' => $user['last_name'],
+			//'profile_age' => $user->profil['age']
+		];
+	}
     
 }
