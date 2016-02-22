@@ -14,8 +14,12 @@ class Profil extends Model
 
 		'location',
 		'age',
-		'hobbies',
-		'about'
+		'sex',
+		'about',
+		'destination',
+		'interests',
+		'looking_for',
+
 
 	];
 }

@@ -41,15 +41,9 @@ class UserController extends Controller
 			], 404);
 		}
 
-		//get previous User id
-		$previous = User::where('id', '<', $user->id)->max('id');
-
-		//get next User id
-		$next = User::where('id', '>', $user->id)->min('id');
 
 		return response()->json([
-			'previous_user_id' => $previous,
-			'next_user_id' => $next,
+			
 			'data' => $this->transform($user)
 			], 200);
 	}

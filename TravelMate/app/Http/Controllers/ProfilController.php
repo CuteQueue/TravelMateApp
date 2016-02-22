@@ -116,6 +116,9 @@ class ProfilController extends Controller
 			'age' => $profil['age'],
 			'hobbies' => $profil['hobbies'],
 			'about' => $profil['about'],
+			'destination' => $profil['destination'],
+			'looking_for' => $profil['looking_for'],
+			'sex' => $profil['sex'],
 		];
 	}
 
