@@ -89,9 +89,9 @@ class ProfilController extends Controller
         $profil->sex= $request->sex;
         $profil->location= $request->location;
         $profil->destination= $request->destination;
+        $profil->startdate = $request->startdate;
         $profil->interests= $request->interests;
         $profil->looking_for= $request->looking_for;
-       // $profil->hobbies= $request->hobbies;
         $profil->about= $request->about;
         $profil->save(); 
 	}
@@ -134,10 +134,9 @@ class ProfilController extends Controller
 			'sex' => $profil['sex'],
 			'location' => $profil['location'],
 			'destination' => $profil['destination'],
-			//'when' => $profil['when'],
+			'startdate' => $profil['startdate'],
 			'interests' => $profil['interests'],
 			'looking_for' => $profil['looking_for'],
-			//'hobbies' => $profil['hobbies'],
 			'about' => $profil['about']
 		];
 	}

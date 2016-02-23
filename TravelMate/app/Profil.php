@@ -17,7 +17,7 @@ class Profil extends Model
 		'sex',
 		'location',
 		'destination',
-		//'when',
+		'startdate',
 		'interests',
 		'looking_for',
 		'about'
