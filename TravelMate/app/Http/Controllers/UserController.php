@@ -17,9 +17,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 class UserController extends Controller
 {	
 	public function __construct(){
-        //$this->middleware('auth.basic');
-        //$this->middleware('jwt.auth');
-        //$this->middleware('auth', ['only' => 'store', 'transform']);
+        
     }
 
 	public function index(){
@@ -48,20 +46,8 @@ class UserController extends Controller
 
 
 
-	
 
-	public function create(){
-
-		return redirect('/register');
-	}
-	
-	/*public function show(){
-		//return redirect('/login');
-		 return View::make('/login');
-	}*/
-
-
-//STORE USER
+    //STORE USER
 	public function store(Request $request)
     {
  
@@ -81,8 +67,8 @@ class UserController extends Controller
     }
 
 
-//UPDATE USER
-    /*public function update(Request $request, $id)
+    //UPDATE USER
+    public function update(Request $request, $id)
     {    
         if(! $request->email or ! $request->password){
             return response()->json([
@@ -100,9 +86,9 @@ class UserController extends Controller
         return response()->json([
                 'message' => 'User Updated Succesfully'
         ]);
-    }*/
+    }
 
-//DESTROY USER
+    //DESTROY USER
       public function destroy($id)
     {
         User::destroy($id);

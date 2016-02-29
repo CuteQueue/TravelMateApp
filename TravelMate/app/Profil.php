@@ -13,6 +13,7 @@ class Profil extends Model
 	protected $fillable = [
 
 		'user_id',
+		'mobilenumber',
 		'age',
 		'sex',
 		'location',

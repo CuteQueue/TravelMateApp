@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -23,9 +22,6 @@
 |
 */
 
-/*Route::group(['middleware' => ['web']], function () {
-    //
-});*/
 use App\Profil as Profil;
 
 Route::group(['middleware' => 'cors', 'prefix' => 'api/v1'], function()
@@ -33,13 +29,15 @@ Route::group(['middleware' => 'cors', 'prefix' => 'api/v1'], function()
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
-    // Route::get('profil', 'ProfilController@show');
+
     Route::post('user', 'UserController@store');
     Route::get('user/{id}', 'UserController@show');
-    //Route::get('profil', 'ProfilController@index');
+
     Route::post('profil/create', 'ProfilController@store');
     Route::put('profil/edit/{id}', 'ProfilController@edit');
     Route::get('profil/{id}', 'ProfilController@show');
+
+    Route::post('profil/saveImage', 'ProfilController@saveImage');
     
 });
 
@@ -50,39 +48,10 @@ Route::group(['middleware' => 'cors','prefix' => 'api/v1'], function(){
 
 
 Route::group(['middleware' => 'web'], function () {
-   // Route::auth();
-
-    //oute::get('/home', 'HomeController@index');
-	
+ 	
 	Route::get('/', function () {
-		return ('Hello World');
+		return ('Hello World!');
 	});
-
-	//Route::post('user', 'UserController@store');
-
-	Route::put('user', 'UserController@user');
-
-	//Route::put('user', 'UserController@update');
-
-	Route::delete('user', 'UserController@destroy');
-
-	Route::get('user/create', 'UserController@create');
-
-	Route::get('user/login', 'UserController@show');
-
-	Route::get('user', 'UserController@show');
-
-	Route::get('profil/edit', 'ProfilController@edit');
-
-	Route::post('profil/edit', 'ProfilController@update');
-
-	Route::get('profil/create', 'ProfilController@create');
-
-	Route::post('profil/create', 'ProfilController@store');
-
-	Route::get('profil/delete', 'ProfilController@delete');
-
-	Route::get('profil', 'ProfilController@show');
 
 
 });
