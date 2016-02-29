@@ -19,7 +19,7 @@ class ProfilController extends Controller
 {	
 
 	public function __construct(){
-        
+    
     }
 
 

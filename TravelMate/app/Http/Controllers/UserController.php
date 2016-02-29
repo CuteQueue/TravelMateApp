@@ -47,7 +47,7 @@ class UserController extends Controller
 
 
 
-    //STORE USER
+//STORE USER
 	public function store(Request $request)
     {
  
@@ -67,28 +67,7 @@ class UserController extends Controller
     }
 
 
-    //UPDATE USER
-    public function update(Request $request, $id)
-    {    
-        if(! $request->email or ! $request->password){
-            return response()->json([
-                'error' => [
-                    'message' => 'Please Provide email and password'
-                ]
-            ], 422
-        }
-        
-        $user = User::find($id);
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save(); 
- 
-        return response()->json([
-                'message' => 'User Updated Succesfully'
-        ]);
-    }
-
-    //DESTROY USER
+//DESTROY USER
       public function destroy($id)
     {
         User::destroy($id);
