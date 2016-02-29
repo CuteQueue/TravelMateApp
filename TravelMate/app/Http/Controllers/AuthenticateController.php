@@ -29,7 +29,6 @@ class AuthenticateController extends Controller
     			return response()->json(['error' => 'invalid_credentials'], 401);
     		}
     	} catch (JWTException $e){
-    		//something went wrong
     		return response()->json(['error' => 'could_not_create_token'],500);
     	}
     	//if no errors are encountered we can return a JWT

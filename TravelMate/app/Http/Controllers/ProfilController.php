@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request; //mit dem oberen hat Request::all() nicht funktioniert
+use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Request; //mit dem oberen hat Request::all() nicht funktioniert
 //use App\Models\User;
 use App\Http\Requests\EditProfilRequest;
 use App\Http\Requests;
@@ -12,14 +12,19 @@ use Auth; //um auf  Auth::user()->id zugreifen zu könnnen
 use App\Profil as Profil;
 use App\User as User;
 use DB;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class ProfilController extends Controller
 {	
+
+	public function __construct(){
+        
+    }
+
+
 	public function index(){
-	//$user = Auth::user();
-	//echo $user->name;
-	//echo $user->name;
-	//$profil = $user->profil;
+	
 		$profil = Profil::all();
 		return response()->json([
 			'data' => $this->transformCollection($profil)
@@ -28,9 +33,7 @@ class ProfilController extends Controller
 
 	//----Profil anzeigen----
 	public function show($id){
-		//$user = Auth::user();
-		//$profil = $user->profil;
-		//$id = 33;
+		
 		$user = User::find($id);
 		$profil = $user->profil;
 
@@ -41,66 +44,54 @@ class ProfilController extends Controller
 	}
 
 
-	//----Neues Profil anlegen----
-	public function create(){
-		$user = Auth::user();
-		$data = array('user' => $user);
-		return view('profil.create', $data);
-
-	}
-
 	//----Neues Profil in DB speichern----
-	public function store(){
-		$input = Request::all();
-		$profil = new Profil();
-		//$profil->create($input);
-		$user = Auth::user();
-
-	 	$profil->location = $input['location'];
-	 	$profil->age = $input['age'];
-	 	$profil->hobbies = $input['hobbies'];
-	 	$profil->about = $input['about'];
-		$profil->user_id = $user->id;
-		$profil->save();
+	public function store(Request $request){
 		
-		return redirect('profil')->with('message', 'success|Profil created!');
+		 $profil = Profil::create($request->all());
+ 
+        return response()->json([
+                'message' => 'Profil Created Succesfully!',
+                'data' => $this->transform($profil)
+        ]);
 	}
 
 
 	//----Profil bearbeiten----
-	public function edit(){
-		$user = Auth::user();
-		$profil = $user->profil;
+	public function edit(Request $request, $id){
 		
-		$data = array('profil' => $profil);
-		return view('profil.edit', $data);
-	}
+        $user = User::find($id);
+        $profil = $user->profil;
+        $profil->user_id = $request->user_id;
+        $profil->mobilenumber = $request->mobilenumber;
+        $profil->age= $request->age;
+        $profil->sex= $request->sex;
+        $profil->location= $request->location;
+        $profil->destination= $request->destination;
+        $profil->startdate = $request->startdate;
+        $profil->interests= $request->interests;
+        $profil->looking_for= $request->looking_for;
+        $profil->about= $request->about;
+        $profil->save(); 
 
-	//----Profilupdate in DB schreiben
-	public function update(EditProfilRequest $request){
-
-		$input = $request->all();
-		$user = Auth::user();
-		$profil = $user->profil;
-
-		$profil->update($input);
-
-		//--ALT:  return redirect('profil')->with('message', 'success|Profil erfolgreich aktualisiert!');
-		//NEU
-		 return response()->json([
-                'message' => 'Profil Updated Succesfully',
+        return response()->json([
+                'message' => 'Profil Updated Succesfully!',
                 'data' => $this->transform($profil)
-        ],200);
-
+        ]);
 	}
+
+	
 
 	//----Profil loeschen----
-	public function delete(){
-		$user = Auth::user();
+	public function delete($id){
+
+		$user = User::find($id);
 		$profil = $user->profil;
 		$profil->delete();
 
-		return redirect('home')->with('message', 'success|Profil deleted!');
+		
+		return response()->json([
+			'data' => $this->transform($profil)
+		], 200);
 	}
 
 
@@ -112,10 +103,15 @@ class ProfilController extends Controller
 		return[
 			'id' => $profil['id'],
 			'user_id' => $profil['user_id'],
-			'location' => $profil['location'],
+			'mobilenumber' => $profil['mobilenumber'],
 			'age' => $profil['age'],
-			'hobbies' => $profil['hobbies'],
-			'about' => $profil['about'],
+			'sex' => $profil['sex'],
+			'location' => $profil['location'],
+			'destination' => $profil['destination'],
+			'startdate' => $profil['startdate'],
+			'interests' => $profil['interests'],
+			'looking_for' => $profil['looking_for'],
+			'about' => $profil['about']
 		];
 	}
 
